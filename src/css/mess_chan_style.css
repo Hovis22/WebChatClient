@@ -1,0 +1,176 @@
+
+.mess-channels{
+    display: flex;
+    flex-direction: column;
+   background-color: rgb(31, 30, 30);
+   width: 30vw;
+  overflow-y: scroll;
+  height: 100vh;
+  border-right: 1px rgb(50, 49, 49) solid;
+}
+
+.mess-channels::-webkit-scrollbar {
+    width: 8px;
+    
+  }
+  
+.mess-channels::-webkit-scrollbar-track {
+    background-color: rgb(31, 30, 30);
+    
+    
+  }
+
+  .mess-channels::-webkit-scrollbar-thumb{
+    background-color: rgb(85, 85, 92);
+    border-radius: 20px;
+}
+
+
+
+.channels-interface{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+ 
+   padding: 15px;
+}
+
+.menu-wrapper{
+    margin-right: 5px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    width: 45px;
+}
+
+.menu-wrapper .zxc{
+    width: 30px;
+    margin-top: 2px;
+
+}
+
+.menu-wrapper:hover{
+    background-color: rgb(47, 51, 51);
+    border-radius: 100%;
+}
+
+
+
+.search-input{
+    background-color:rgb(44,44,44);
+    border-radius: 15px;
+    display: flex;
+    width: 90%;
+   justify-content: center;
+   align-items: center;   
+}
+
+
+.search-input svg{
+    font-size: 19px;
+    width: 18px;
+    height: 40px;
+    margin-left: 15px;
+}
+
+
+.channels-interface input{
+   margin-left: 10px;
+   color: white;
+    border: 0px;
+    width: 100%;
+    height: 100%;
+    background-color:rgb(44,44,44);
+    outline: none;
+   border-radius: 10px;
+   font-size: 16px;
+}
+
+.channels-interface svg{    
+    width: 18px;
+    height: 40px;
+    color: rgb(182, 174, 174);
+}
+
+
+
+.channel-block,.channel-block-active{
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    margin:0 8px;
+    padding: 5px;
+    padding-right:10px;
+    
+}
+
+
+.channel-block-active{
+    border-radius: 10px;
+    background-color: rgb(110, 43, 173);
+}
+
+.channel-block:hover{
+ background-color: rgb(47, 51, 51);
+ border-radius: 10px;
+}
+
+
+.image-block img{
+    margin:0 10px;
+    width: 3.375rem;
+    height: 3.375rem;
+    border-radius: 100px;
+    border: 1px rgb(209, 206, 206) solid;
+}
+
+
+
+.info-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding:5px 0px;
+
+}
+
+
+
+
+.text-block{
+    display: flex;
+   flex-direction: column;
+    color: white;
+  
+}
+
+.text-block h3{
+   font-size: 18px;
+    font-weight: 600;
+}
+
+.text-block p{
+    color: rgb(182, 174, 174);
+}
+
+.date-check{
+   display: flex;
+   flex-direction: column;
+}
+
+.date-check p{
+    color: grey;
+    font-size: 15px;
+}
+
+
+.un-check{
+    margin-top: 5px;
+    display: flex;
+    background-color: white;
+   border-radius: 100px;
+   justify-content: center;
+}
+
+

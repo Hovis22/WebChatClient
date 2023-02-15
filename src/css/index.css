@@ -1,0 +1,24 @@
+@import url('http://fonts.cdnfonts.com/css/gotham');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* font-family: 'Gotham', sans-serif; */
+    font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Apple Color Emoji", "Segoe UI", Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  
+
+}
+
+body{
+    overflow: hidden;
+    background: url(../img/blacktheam.png);
+    background-color:  #0F0F0F;
+    background-size: 30%;
+}
+
+
+.wrapper{
+    display: flex;
+    flex-direction: row;
+}
