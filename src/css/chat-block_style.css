@@ -70,6 +70,7 @@
 .main-chat-block {
     display: flex;
     flex-direction: column;
+    flex-direction: column-reverse;
     z-index: 1;
     color: white;
     position: absolute;

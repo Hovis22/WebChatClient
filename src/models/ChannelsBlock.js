@@ -1,21 +1,12 @@
 import ChanInterface from './ChanInterface';
 import Channel from './Channel';
-import React, { useState, useEffect } from 'react';
 
 
-const friendList = [
-  { id: 1, name: 'Татьяна' },
-  { id: 2, name: 'Алла' },
-  { id: 3, name: 'Лиля' },
-];
 
 
-export default function ChannelsBlock() {
-  const [activeID, setactiveID] = useState(null);
+export default function ChannelsBlock({activeID,setactiveID,friendList}) {
+  
  
-  useEffect(() => {
-   console.log(activeID);
-  });
 
     return (
       <div className="mess-channels">
