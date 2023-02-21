@@ -8,7 +8,6 @@ import {Search} from  'react-bootstrap-icons';
         
         <div className="menu-wrapper">
           <List className='zxc'/>
-          {/* <i  className=" bi bi-list"></i> */}
          </div>
 
           <div className="search-input">

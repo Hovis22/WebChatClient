@@ -9,7 +9,7 @@ export default function ChatHeader({ActiveChannel}) {
             <img src="/img/dora.jpg" alt=""/>
           </div>
           <div className="text-block">
-            <h3>{ActiveChannel.name}</h3>
+            <h3>{ActiveChannel.UserName}</h3>
             <p>{ActiveChannel.isOnline}</p>
           </div>
         </div>

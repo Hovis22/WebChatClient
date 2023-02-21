@@ -1,18 +1,18 @@
 import { act } from 'react-dom/test-utils';
 
-export default function Channel({setactiveID,friend,activeID}){
+export default function Channel({setactiveID,channel,activeID,handleSubmit}){
 
   var blstyle = "channel-block";
-    if(activeID == friend.id){
+    if(activeID == channel.Id){
       blstyle= "channel-block-active";
     }
 
 
 
     return (
-        <div className="channel-wrapper">
+        <div onClick={handleSubmit} className="channel-wrapper">
 
-        <div onClick={()=>setactiveID(friend.id)} className={blstyle}>
+        <div onClick={()=>setactiveID(channel.Id)} className={blstyle}>
           <div className="image-block">
             <img src={require('../img/dora.jpg')} alt=""/>
           </div>
@@ -20,15 +20,15 @@ export default function Channel({setactiveID,friend,activeID}){
           <div className="info-container">
 
             <div className="text-block">
-              <h3>{friend.name}</h3>
-              <p>Hi how Do you Do?</p>
+              <h3>{channel.UserName}</h3>
+              <p>{channel.LastMessage}</p>
             </div>
 
 
             <div className="date-check">
               <p>00:51</p>
               <div className="un-check">
-                <p>1</p>
+                <p>{channel.MessageCount}</p>
               </div>
             </div>
 

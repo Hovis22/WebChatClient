@@ -1,17 +1,16 @@
 
 
-let userId = 1;
+let userId = localStorage.getItem("userId");
 
 function IsOwn(message){
-    console.log(message);
-    if(message.userId == userId){
-   return( <div key={message.id} className="message-own-wrapper">
-    <p>{message.text}</p>
+    if(message.UserId == userId){
+   return( <div key={message.Id} className="message-own-wrapper">
+    <p>{message.Mess_Text}</p>
   </div>);
    }
    else{
-    return( <div key={message.id}  className="message-other-wrapper">
-    <p>{message.text}</p>
+    return( <div key={message.Id}  className="message-other-wrapper">
+    <p>{message.Mess_Text}</p>
   </div>);
    }
 
