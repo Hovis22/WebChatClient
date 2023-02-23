@@ -12,7 +12,7 @@ const MessagesList = [
     { id: 4,userId: 2,  text:"Fine"},
   ];
 
-export default function ChatBlock({ActiveChannel,Messages}) {
+export default function ChatBlock({ActiveChannel,Messages,handleSendMess}) {
   const [isNull, setisNull] = useState(true);
 
   useEffect(()=>{
@@ -30,11 +30,11 @@ export default function ChatBlock({ActiveChannel,Messages}) {
 
            <div className="main-chat-wrapper">
            <div className="main-chat-block">
-            <ChatInterface/>
+            <ChatInterface handleSendMess={handleSendMess} ActiveChannel={ActiveChannel} Messages={Messages}/>
 
 
             {isNull ? (
-        <p>No Message</p>
+         <div></div>
       ) : (
         <>
             <Chat Messages={Messages}/>

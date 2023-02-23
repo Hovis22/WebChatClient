@@ -14,15 +14,18 @@ function App() {
   const [activeID, setactiveID] = useState(null);
   const [chatBl, setchatBl] = useState(null);
   const [channelsList,setchannelsList] = useState(null)
-  const [messages,setmessages] = useState(null);
+  let [messages,setmessages] = useState(null);
 
 
 
   useEffect(() => {
     let id = localStorage.getItem("userId");
-    ws.current = new WebSocket("wss://localhost:5028/hi?id="+ id); // создаем ws соединение
-    setSocket(ws.current);
-    gettingData();
+
+      console.log(97897);
+      ws.current = new WebSocket("wss://localhost:7237/hi?id="+ id);
+      setSocket(ws.current);
+      gettingData();
+    
 
 
     return () => {
@@ -31,13 +34,37 @@ function App() {
      },[]);
 
 
-  const handleSubmit = (event) => {
+
+
+    useEffect(() => {
+      if(activeID != null){  
+        handleSubChannel();
+      }
+        },[activeID]);
+  
+
+
+  
+  useEffect(() => {
+    if(messages != null){  
+
+
+      console.log(messages);
+     ActiveChannel = channelsList.find(x => x.Id == activeID);
+       const elem = IsActive({ActiveChannel,messages,handleSendMess});
+       setchatBl(elem);
+
+    }
+      },[messages]);
+
+
+
+   async function handleSubChannel() {
  
-    event.preventDefault();
     let test = {
       "name": "GetChatById",
       "object":{
-        "Id":activeID,
+        "Id":activeID.toString(),
         
       }
     }
@@ -45,58 +72,60 @@ function App() {
     console.log("handle");
      let data = JSON.stringify(test);
       console.log(data);
-      socket.send(data);
+     await socket.send(data);
    
     
   };
 
+
+  async function handleSendMess(mes) {
+
+     let data = JSON.stringify(mes);
+     await socket.send(data);
+
+  };
+
+
+
+  const gettingData = useCallback(() => {
+    DataFromServer();
+  }, []);
   
-
-
-
-     const  gettingData = useCallback(() => {
-      if (!ws.current) return;
-      
-      ws.current.onmessage = e => {            
-          const message = e.data;
-        
-        const data =  JSON.parse(message)
-    
-          switch(data.Name){
-            case "GetChannels": setchannelsList(data.Data);
-            break;
-            case "Messages":setmessages(data.Data);
-            break;
-          }
-    
-     
-    
-      };
-    });
-    
-
-
-
-
-
+   function DataFromServer() {
+    if (!ws.current) return;
   
-  useEffect(() => {
-    console.log(123);
-    if(activeID != null){  
-
-     ActiveChannel = channelsList.find(x => x.Id == activeID);
-       const elem = IsActive({ActiveChannel,messages});
-       setchatBl(elem);
-
-    }
-      },[messages]);
-
+    ws.current.onmessage = (e) => {
+      try {
+        const message = e.data;
+        const data = JSON.parse(message);
+       console.log(data);
+        switch (data.Name) {
+          case "GetChannels":
+            setchannelsList(data.Data);
+            break;
+          case "Messages":
+            setmessages(data.Data);
+            break;
+          case "NewMessage":
+            { 
+              // let arr = messages +data.Data;
+              // console.log(arr);
+              setmessages(prevState => prevState.concat(data.Data));
+             
+            }
+              break;
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  }
 
    
   return (
     <div id='wrap' className="wrapper">
       
-       <ChannelsBlock activeID={activeID} setactiveID={setactiveID} channelsList={channelsList} setchannelsList={setchannelsList} handleSubmit={handleSubmit}/>
+       <ChannelsBlock activeID={activeID} setactiveID={setactiveID} channelsList={channelsList}/>
        {chatBl}
     </div>
   );

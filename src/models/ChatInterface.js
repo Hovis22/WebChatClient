@@ -7,53 +7,31 @@ import React, { useState, useEffect,useCallback,useRef } from 'react';
 
 
 
-export default function ChatInterface(){
-//   const ws = useRef(null);
-//   const [socket, setSocket] = useState(null);
+export default function ChatInterface({handleSendMess,ActiveChannel}){
+
+  const [messtext,setmesstext] = useState();
 
 
-//   function GetWeb(){
-
-//     let id = localStorage.getItem("userId");
-//     ws.current = new WebSocket("wss://localhost:5028/hi?id="+id); // создаем ws соединение
-//     setSocket(ws);
-//     gettingData();
-//   }
+  function CreateMess(){
+    const mes = {
+      "name": "PostMess",
+      "object":{
+        "UserId":localStorage.getItem("userId"),
+        "ChatId":ActiveChannel.Id.toString(),
+        "MessageText":messtext.toString()
+      }
+    }
   
-  
-//   const handleSubmit = (event) => {
-//     event.preventDefault();
-//    console.log(123);
-   
-//       socket.current.send("Hi from Client");
-   
-    
-//   };
+    handleSendMess(mes);
 
-
-  
-
-
-
-// const gettingData = useCallback(() => {
-//   if (!ws.current) return;
-
-//   ws.current.onmessage = e => {            
-//       const message = e.data;
-//      console.log(message);
-//   };
-// });
-
-
-
-
+  }
 
 
  return(
     <div className="centre-interf">
     <div className="message-interf">
 
-      <input placeholder = "Message" type="text"/>
+      <input  onChange={(event) => setmesstext(event.target.value)} placeholder = "Message" type="text"/>
 
       <div className="icon-pad">
 
@@ -62,7 +40,7 @@ export default function ChatInterface(){
           <Paperclip/>
         </label>
 
-        <label  className="custom-button">
+        <label onClick={CreateMess}  className="custom-button">
            <CaretUpFill/>
         </label>
 

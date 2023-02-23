@@ -1,6 +1,6 @@
 import { act } from 'react-dom/test-utils';
 
-export default function Channel({setactiveID,channel,activeID,handleSubmit}){
+export default function Channel({setactiveID,channel,activeID}){
 
   var blstyle = "channel-block";
     if(activeID == channel.Id){
@@ -10,7 +10,7 @@ export default function Channel({setactiveID,channel,activeID,handleSubmit}){
 
 
     return (
-        <div onClick={handleSubmit} className="channel-wrapper">
+        <div  className="channel-wrapper">
 
         <div onClick={()=>setactiveID(channel.Id)} className={blstyle}>
           <div className="image-block">
