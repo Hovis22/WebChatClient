@@ -1,8 +1,36 @@
-
+import { useState } from "react"
 
 
 export default function Login({setisLogin}){
+   const [login,setlogin]= useState("");
+   const [password,setpassword]= useState("");
+
+     
+   function SendLogin() {
+      const data = {
+        "login": login,
+        "password": password
+      }
   
+      fetch('https://localhost:7237/api/Form/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+        .then(data => data.text())
+        .then(e => {
+          localStorage.setItem("User",e);
+
+        }
+          )
+        .catch(error => {
+          console.error(error);
+        });
+    }
+
+
 
     return(
      <>
@@ -15,16 +43,16 @@ export default function Login({setisLogin}){
    
              <div className="input-block">
                 <label >Name</label>
-                <input type="text"/>
+                <input type="text"   onChange={(event) => setlogin(event.target.value)}      />
              </div>
    
              <div className="input-block">
                <label>Password</label>
-               <input type="text"/>
+               <input type="text"   onChange={(event) => setpassword(event.target.value)} />
             </div>
     
    
-           <button>Submit</button>
+           <input type="button" onClick={SendLogin} value="Submit"/>
    
           <label className="reg-link">Allready Register?<span className="reg-linkbut"  onClick={()=>setisLogin(false)} > Login</span></label>
    

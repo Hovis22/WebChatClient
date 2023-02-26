@@ -5,12 +5,7 @@ import ChatInterface from './ChatInterface';
 
 import React, { useState,useEffect } from 'react';
 
-const MessagesList = [
-    { id: 1,userId: 1, text:"Hi" },
-    { id: 2, userId: 1,text:"How are You"},
-    { id: 3,userId: 2, text:"Hi"},
-    { id: 4,userId: 2,  text:"Fine"},
-  ];
+
 
 export default function ChatBlock({ActiveChannel,Messages,handleSendMess}) {
   const [isNull, setisNull] = useState(true);

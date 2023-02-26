@@ -1,9 +1,11 @@
+import jwt_decode from "jwt-decode";
 
-
-let userId = localStorage.getItem("userId");
-
+let user;
+if(localStorage.getItem("User") !=null){
+ user =jwt_decode(localStorage.getItem("User"));
+}
 function IsOwn(message){
-    if(message.UserId == userId){
+    if(message.UserId == user.Id){
    return( <div key={message.Id} className="message-own-wrapper">
     <p>{message.Mess_Text}</p>
   </div>);

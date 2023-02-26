@@ -2,6 +2,7 @@ import {CaretUpFill} from  'react-bootstrap-icons';
 import {Paperclip} from  'react-bootstrap-icons';
 
 import React, { useState, useEffect,useCallback,useRef } from 'react';
+import jwt_decode from "jwt-decode";
 
 
 
@@ -13,10 +14,13 @@ export default function ChatInterface({handleSendMess,ActiveChannel}){
 
 
   function CreateMess(){
-    const mes = {
+    let user = jwt_decode(localStorage.getItem("User"));
+     
+     
+    let mes = {
       "name": "PostMess",
       "object":{
-        "UserId":localStorage.getItem("userId"),
+        "UserId":user.Id.toString(),
         "ChatId":ActiveChannel.Id.toString(),
         "MessageText":messtext.toString()
       }

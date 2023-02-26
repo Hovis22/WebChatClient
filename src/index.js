@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
 import Forms from './models/Login/Forms';
 import reportWebVitals from './reportWebVitals';
@@ -12,7 +11,7 @@ import 'react-bootstrap-icons';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const id = localStorage.getItem("userId");
+const id = localStorage.getItem("User");
 
 root.render(
   <React.StrictMode>

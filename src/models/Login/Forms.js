@@ -6,9 +6,9 @@ import Register from "./Register";
 
 export default function Forms(){
     const [isLogin,setisLogin] = useState(true);
-
+   console.log(123);
     return(
-        <div class="form-wrapper">
+        <div className="form-wrapper">
 
 
       

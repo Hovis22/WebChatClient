@@ -1,7 +1,6 @@
-import ChannelsBlock from './models/ChannelsBlock';
-import ChatBlock from './models/ChatBlock';
-import IsActive from './func/IsActive';
-import Cookies from 'js-cookie';
+ import ChannelsBlock from './models/ChannelsBlock';
+ import IsActive from './func/IsActive';
+import jwt_decode from "jwt-decode";
 
 import React, { useState, useEffect,useCallback,useRef } from 'react';
 
@@ -19,10 +18,12 @@ function App() {
 
 
   useEffect(() => {
-    let id = localStorage.getItem("userId");
-
-      console.log(97897);
-      ws.current = new WebSocket("wss://localhost:7237/hi?id="+ id);
+    console.log(123);
+    
+    let user = jwt_decode(localStorage.getItem("User"));
+     
+      console.log(user);
+      ws.current = new WebSocket("wss://localhost:7237/hi?id="+ user.Id);
       setSocket(ws.current);
       gettingData();
     
@@ -80,7 +81,7 @@ function App() {
 
   async function handleSendMess(mes) {
 
-     let data = JSON.stringify(mes);
+     let data = await JSON.stringify(mes);
      await socket.send(data);
 
   };
@@ -121,11 +122,14 @@ function App() {
     };
   }
 
+
+
+  
    
   return (
     <div id='wrap' className="wrapper">
       
-       <ChannelsBlock activeID={activeID} setactiveID={setactiveID} channelsList={channelsList}/>
+      <ChannelsBlock activeID={activeID} setactiveID={setactiveID} channelsList={channelsList}/>
        {chatBl}
     </div>
   );

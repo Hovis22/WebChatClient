@@ -52,7 +52,7 @@ form{
 }
 
 
-form button{
+form input[type="button"]{
     margin-top: 5px;
     color: white;
     background-color: rgb(21, 108, 222);
@@ -63,7 +63,10 @@ form button{
     border-radius: 5px;
 }
 
-
+form input[type="button"]:hover{
+    background-color: rgb(12, 50, 99);
+   cursor: pointer;
+}
 
 .reg-link{
     font-weight: 500;
