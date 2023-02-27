@@ -29,9 +29,10 @@ export default function ChatBlock({ActiveChannel,Messages,handleSendMess}) {
 
 
             {isNull ? (
-         <div></div>
+         <></>
       ) : (
         <>
+          
             <Chat Messages={Messages}/>
        </>
       )}

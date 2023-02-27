@@ -1,4 +1,4 @@
-import { act } from 'react-dom/test-utils';
+
 
 export default function Channel({setactiveID,channel,activeID}){
 
@@ -26,7 +26,7 @@ export default function Channel({setactiveID,channel,activeID}){
 
 
             <div className="date-check">
-              <p>00:51</p>
+              <p>{channel.LastMessageCreated}</p>
               <div className="un-check">
                 <p>{channel.MessageCount}</p>
               </div>

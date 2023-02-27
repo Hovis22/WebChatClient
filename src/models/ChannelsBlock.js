@@ -2,24 +2,52 @@ import ChanInterface from './ChanInterface';
 import Channel from './Channel';
 
 import React, { useState, useEffect } from 'react';
+import SearchChannel from './SearchChannel';
 
 
 
 
 
 
-export default function ChannelsBlock({activeID,setactiveID,channelsList,handleSubChannel}) {
+export default function ChannelsBlock({activeID,setactiveID,channelsList,handleSearchChannel,searchResult,MessSearch}) {
 
   const [isNull, setisNull] = useState(true);
+  const [isNullSearch, setNullSearch] = useState(true);
+
+  const [filterChats,setfilterChats] = useState(null);
+
+    useEffect(()=>{
+      console.log(channelsList);
+     if(MessSearch != null && MessSearch.object.value != ""){
+      console.log(MessSearch.object.value);
+      setfilterChats(channelsList.filter((item) => item.UserName.toLowerCase().startsWith(MessSearch.object.value.toLowerCase())));
+      console.log(filterChats);
+     }
+    else{
+      if(channelsList !=null){
+      setfilterChats(channelsList);
+          }
+    }
+    },[MessSearch,channelsList])
+
+
 
 
   
      useEffect(() => {
-      if (channelsList !== null) {
+      if (filterChats !== null) {
 
         setisNull(false);
       }
-    }, [channelsList]);
+    }, [filterChats]);
+
+    useEffect(() => {
+      setNullSearch(true);
+      if (searchResult !== null) {
+
+        setNullSearch(false);
+      }
+    }, [searchResult]);
 
 
 
@@ -31,21 +59,52 @@ export default function ChannelsBlock({activeID,setactiveID,channelsList,handleS
     
  
        
-       <ChanInterface/>
+       <ChanInterface handleSearchChannel={handleSearchChannel}/>
          {isNull ? (
         <p>No Channels</p>
       ) : (
         <>
 
-      {channelsList.map((channel)=>
+       {filterChats.map((channel)=>
           <Channel key={channel.Id} activeID={activeID} channel={channel} setactiveID={setactiveID}/>
       )}
-      
+
+      </>
+   )}
 
 
-       </>
+
+      {isNullSearch ? (
+          <></>
+      ) : (
+        <>
+        <p>Global Search</p>
+       {searchResult.map((channel)=>
+          <SearchChannel key={channel.Id} activeID={activeID} channel={channel} setactiveID={setactiveID}/>
       )}
+
+      </>
+   )}
+
+
+
+
+
+
+
+
+
+
+
+
       </div>
+
+
+  
+    
+
+       
+   
     );
 
 

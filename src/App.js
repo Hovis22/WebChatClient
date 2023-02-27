@@ -9,20 +9,21 @@ import React, { useState, useEffect,useCallback,useRef } from 'react';
   var ActiveChannel = null;
 function App() {
   const ws = useRef(null);
-  const [socket, setSocket] = useState(null);
+  const [socket, setSocket] = useState({});
   const [activeID, setactiveID] = useState(null);
   const [chatBl, setchatBl] = useState(null);
   const [channelsList,setchannelsList] = useState(null)
   let [messages,setmessages] = useState(null);
+  const [searchmess,setsearchmess] = useState(null);
+  let [searchResult,setsearchResult] = useState(null);
 
 
 
+  
   useEffect(() => {
-    console.log(123);
-    
+        
     let user = jwt_decode(localStorage.getItem("User"));
      
-      console.log(user);
       ws.current = new WebSocket("wss://localhost:7237/hi?id="+ user.Id);
       setSocket(ws.current);
       gettingData();
@@ -30,7 +31,9 @@ function App() {
 
 
     return () => {
+      
       ws.current.close(); 
+     setSocket(null);
     };
      },[]);
 
@@ -39,7 +42,16 @@ function App() {
 
     useEffect(() => {
       if(activeID != null){  
-        handleSubChannel();
+
+
+        let test = {
+          "name": "GetChatById",
+          "object":{
+            "Id":activeID.toString(),
+            
+          }
+        }
+        handleSendMess(test);
       }
         },[activeID]);
   
@@ -50,7 +62,7 @@ function App() {
     if(messages != null){  
 
 
-      console.log(messages);
+     
      ActiveChannel = channelsList.find(x => x.Id == activeID);
        const elem = IsActive({ActiveChannel,messages,handleSendMess});
        setchatBl(elem);
@@ -60,31 +72,40 @@ function App() {
 
 
 
-   async function handleSubChannel() {
- 
-    let test = {
-      "name": "GetChatById",
-      "object":{
-        "Id":activeID.toString(),
-        
-      }
-    }
-
-    console.log("handle");
-     let data = JSON.stringify(test);
-      console.log(data);
-     await socket.send(data);
+   useEffect(()=>{
    
-    
-  };
+
+     
+    if(searchmess != null){
+      setsearchResult(null);
+      if(searchmess.object.value.length > 3){  
+        console.log("serchDB"); 
+      handleSendMess(searchmess);
+      }
+     
+
+
+     }
+   },[searchmess])
+
+
 
 
   async function handleSendMess(mes) {
 
      let data = await JSON.stringify(mes);
+     console.log(data);
+     console.log(socket);
      await socket.send(data);
-
+     
   };
+
+
+   useEffect(()=> {
+       
+     console.log(socket);
+   },[socket])
+
 
 
 
@@ -102,6 +123,7 @@ function App() {
        console.log(data);
         switch (data.Name) {
           case "GetChannels":
+          
             setchannelsList(data.Data);
             break;
           case "Messages":
@@ -109,12 +131,14 @@ function App() {
             break;
           case "NewMessage":
             { 
-              // let arr = messages +data.Data;
-              // console.log(arr);
               setmessages(prevState => prevState.concat(data.Data));
-             
             }
               break;
+          case "ChannelsFound":
+                { 
+                  setsearchResult(data.Data);
+                }
+                  break;
         }
       } catch (error) {
         console.error(error);
@@ -129,7 +153,7 @@ function App() {
   return (
     <div id='wrap' className="wrapper">
       
-      <ChannelsBlock activeID={activeID} setactiveID={setactiveID} channelsList={channelsList}/>
+      <ChannelsBlock activeID={activeID} setactiveID={setactiveID} channelsList={channelsList} handleSearchChannel={setsearchmess} searchResult={searchResult} MessSearch = {searchmess}/>
        {chatBl}
     </div>
   );
