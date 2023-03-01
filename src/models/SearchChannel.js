@@ -1,19 +1,32 @@
+import jwt_decode from "jwt-decode";
 
 
 
-export default function SearchChannel({setactiveID,channel,activeID}){
+export default function SearchChannel({channel,handleSendMess}){
 
-    var blstyle = "channel-block";
-      if(activeID == channel.Id){
-        blstyle= "channel-block-active";
-      }
+       
+    function SendUserToAdd(){
+      let user = jwt_decode(localStorage.getItem("User"));
+
+      let mess = {
   
+        "name":"  ",
+        "object":{
+          "OwnUserId":user.Id.toString(),
+          "UserToAdd":channel.Id.toString(),
+        }
+      }
+      handleSendMess(mess);
+
+    }
+
+
   
   
       return (
-          <div  className="channel-wrapper">
+          <div className="channel-wrapper">
   
-          <div onClick={()=>setactiveID(channel.Id)} className={blstyle}>
+          <div onClick={()=>SendUserToAdd()} className="channel-block">
             <div className="image-block">
               <img src={require('../img/dora.jpg')} alt=""/>
             </div>
