@@ -16,6 +16,7 @@ function App() {
   let [messages,setmessages] = useState(null);
   const [searchmess,setsearchmess] = useState(null);
   let [searchResult,setsearchResult] = useState(null);
+  const [isNullSearch, setNullSearch] = useState(true);
 
 
 
@@ -74,19 +75,27 @@ function App() {
 
    useEffect(()=>{
    
-
-     
     if(searchmess != null){
       setsearchResult(null);
       if(searchmess.object.value.length > 3){  
         console.log("serchDB"); 
       handleSendMess(searchmess);
       }
-     
-
-
+      else{
+        setNullSearch(true);
+      }
      }
    },[searchmess])
+
+
+
+    useEffect(() => {
+      if (searchResult !== null) {
+
+        setNullSearch(false);
+      }
+    }, [searchResult]);
+
 
 
 
@@ -101,10 +110,6 @@ function App() {
   };
 
 
-   useEffect(()=> {
-       
-     console.log(socket);
-   },[socket])
 
 
 
@@ -129,16 +134,14 @@ function App() {
           case "Messages":
             setmessages(data.Data);
             break;
-          case "NewMessage":
-            { 
-              setmessages(prevState => prevState.concat(data.Data));
-            }
+          case "NewMessage":setmessages(prevState => prevState.concat(data.Data));
               break;
-          case "ChannelsFound":
-                { 
-                  setsearchResult(data.Data);
-                }
+          case "ChannelsFound": setsearchResult(data.Data);
                   break;
+          case "AddChannel": setsearchResult(data.Data);
+                  break;
+
+
         }
       } catch (error) {
         console.error(error);
@@ -153,7 +156,7 @@ function App() {
   return (
     <div id='wrap' className="wrapper">
       
-      <ChannelsBlock activeID={activeID} setactiveID={setactiveID} channelsList={channelsList} handleSearchChannel={setsearchmess} searchResult={searchResult} MessSearch = {searchmess}/>
+      <ChannelsBlock activeID={activeID} setactiveID={setactiveID} channelsList={channelsList} handleSearchChannel={setsearchmess} handleSendMess={handleSendMess} searchResult={searchResult} MessSearch = {searchmess} isNullSearch={isNullSearch}/>
        {chatBl}
     </div>
   );

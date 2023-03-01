@@ -9,10 +9,9 @@ import SearchChannel from './SearchChannel';
 
 
 
-export default function ChannelsBlock({activeID,setactiveID,channelsList,handleSearchChannel,searchResult,MessSearch}) {
+export default function ChannelsBlock({activeID,setactiveID,channelsList,handleSearchChannel,handleSendMess,searchResult,MessSearch,isNullSearch}) {
 
   const [isNull, setisNull] = useState(true);
-  const [isNullSearch, setNullSearch] = useState(true);
 
   const [filterChats,setfilterChats] = useState(null);
 
@@ -40,15 +39,6 @@ export default function ChannelsBlock({activeID,setactiveID,channelsList,handleS
         setisNull(false);
       }
     }, [filterChats]);
-
-    useEffect(() => {
-      setNullSearch(true);
-      if (searchResult !== null) {
-
-        setNullSearch(false);
-      }
-    }, [searchResult]);
-
 
 
     return (
@@ -80,20 +70,11 @@ export default function ChannelsBlock({activeID,setactiveID,channelsList,handleS
         <>
         <p>Global Search</p>
        {searchResult.map((channel)=>
-          <SearchChannel key={channel.Id} activeID={activeID} channel={channel} setactiveID={setactiveID}/>
+          <SearchChannel key={channel.Id} activeID={activeID} channel={channel} setactiveID={setactiveID} handleSendMess={handleSendMess}/>
       )}
 
       </>
    )}
-
-
-
-
-
-
-
-
-
 
 
 
