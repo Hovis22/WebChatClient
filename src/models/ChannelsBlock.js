@@ -17,11 +17,16 @@ export default function ChannelsBlock({activeID,setactiveID,channelsList,handleS
 
     useEffect(()=>{
       console.log(channelsList);
-     if(MessSearch != null && MessSearch.object.value != ""){
-      console.log(MessSearch.object.value);
+     if(MessSearch != null){
+
+
+
+      if( MessSearch.object.value != ""){
       setfilterChats(channelsList.filter((item) => item.UserName.toLowerCase().startsWith(MessSearch.object.value.toLowerCase())));
-      console.log(filterChats);
-     }
+      }
+     
+    
+    }
     else{
       if(channelsList !=null){
       setfilterChats(channelsList);

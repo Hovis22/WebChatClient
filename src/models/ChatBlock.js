@@ -14,6 +14,8 @@ export default function ChatBlock({ActiveChannel,Messages,handleSendMess}) {
      if(Messages !=null){
       setisNull(false);
      }
+     else
+     setisNull(true)
   },Messages)
 
 

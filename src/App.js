@@ -43,7 +43,7 @@ function App() {
 
     useEffect(() => {
       if(activeID != null){  
-
+        console.log(activeID);
 
         let test = {
           "name": "GetChatById",
@@ -52,6 +52,9 @@ function App() {
             
           }
         }
+
+        console.log(test);
+
         handleSendMess(test);
       }
         },[activeID]);
@@ -78,7 +81,7 @@ function App() {
     if(searchmess != null){
       setsearchResult(null);
       if(searchmess.object.value.length > 3){  
-        console.log("serchDB"); 
+ 
       handleSendMess(searchmess);
       }
       else{
@@ -132,13 +135,17 @@ function App() {
             setchannelsList(data.Data);
             break;
           case "Messages":
+            console.log(data.Data);
             setmessages(data.Data);
             break;
           case "NewMessage":setmessages(prevState => prevState.concat(data.Data));
               break;
           case "ChannelsFound": setsearchResult(data.Data);
                   break;
-          case "AddChannel": setsearchResult(data.Data);
+          case "AddChannel": 
+          setNullSearch(true);
+          setsearchmess(null);
+          setchannelsList(data.Data);
                   break;
 
 

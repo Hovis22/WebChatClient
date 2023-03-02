@@ -10,7 +10,7 @@ export default function SearchChannel({channel,handleSendMess}){
 
       let mess = {
   
-        "name":"  ",
+        "name":"CreateChannel",
         "object":{
           "OwnUserId":user.Id.toString(),
           "UserToAdd":channel.Id.toString(),
