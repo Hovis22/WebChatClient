@@ -1,12 +1,34 @@
+import { useEffect, useState } from 'react';
 
 
 export default function Channel({setactiveID,channel,activeID}){
+   const [messDate,setmessDate] = useState("");
+
 
   var blstyle = "channel-block";
     if(activeID == channel.Id){
       blstyle= "channel-block-active";
     }
 
+
+
+
+    useEffect(() => {
+     let  lastmess =new Date(channel.LastMessageCreated);
+     const today = new Date();
+
+      
+
+      console.log(lastmess);
+      console.log(today);
+       if(lastmess.getDate() == today.getDate()){
+        console.log(lastmess.getTime());
+         setmessDate(lastmess.getHours().toString() +":" + lastmess.getMinutes().toString());
+       }
+
+
+
+    }, [channel.LastMessageCreated]);
 
 
     return (
@@ -21,14 +43,25 @@ export default function Channel({setactiveID,channel,activeID}){
 
             <div className="text-block">
               <h3>{channel.UserName}</h3>
+
+
               <p>{channel.LastMessage}</p>
+            
+            
             </div>
 
 
             <div className="date-check">
-              <p>{channel.LastMessageCreated}</p>
+              <p>{messDate}</p>
               <div className="un-check">
-                <p>{channel.MessageCount}</p>
+
+              {channel.MessageCount > 0 ? (
+        <p>{channel.MessageCount}</p>
+      ) : (
+             <></>
+      )}
+
+
               </div>
             </div>
 

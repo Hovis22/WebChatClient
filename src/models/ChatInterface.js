@@ -8,11 +8,12 @@ import jwt_decode from "jwt-decode";
 
 
 
-export default function ChatInterface({handleSendMess,ActiveChannel}){
+export default function ChatInterface({handleSendMess,ActiveChannel,messtext,setmesstext,messid}){
 
-  const [messtext,setmesstext] = useState();
+ 
 
 
+   
   function CreateMess(){
     let user = jwt_decode(localStorage.getItem("User"));
      
@@ -22,12 +23,14 @@ export default function ChatInterface({handleSendMess,ActiveChannel}){
       "object":{
         "UserId":user.Id.toString(),
         "ChatId":ActiveChannel.Id.toString(),
-        "MessageText":messtext.toString()
+        "MessageText":messtext.toString(),
+        "MessageId":messid
       }
     }
+   console.log(mes);
   
     handleSendMess(mes);
-
+    setmesstext("");
   }
 
 
@@ -35,7 +38,7 @@ export default function ChatInterface({handleSendMess,ActiveChannel}){
     <div className="centre-interf">
     <div className="message-interf">
 
-      <input  onChange={(event) => setmesstext(event.target.value)} placeholder = "Message" type="text"/>
+      <input value={messtext}  onChange={(event) => setmesstext(event.target.value)} placeholder = "Message" type="text"/>
 
       <div className="icon-pad">
 

@@ -1,25 +1,12 @@
 import jwt_decode from "jwt-decode";
 
-let user;
-if(localStorage.getItem("User") !=null){
- user =jwt_decode(localStorage.getItem("User"));
-}
-function IsOwn(message){
-    if(message.UserId == user.Id){
-   return( <div key={message.Id} className="message-own-wrapper">
-    <p>{message.Mess_Text}</p>
-  </div>);
-   }
-   else{
-    return( <div key={message.Id}  className="message-other-wrapper">
-    <p>{message.Mess_Text}</p>
-  </div>);
-   }
+import React, { useState } from "react";
 
-   }
+import ContextMenu   from "../models/ContextMenu";
 
 
-export default function Chat({Messages}) {
+
+export default function Chat({Messages,setmesstext,setmessid}) {
   
  
     
@@ -30,8 +17,9 @@ export default function Chat({Messages}) {
 
 <div className="centre-block">
 
-    {Messages.map((message)=> IsOwn(message))}
 
+    <ContextMenu items={Messages} setmesstext={setmesstext} setmessid={setmessid}/>
+     
 </div>
 
 </div>

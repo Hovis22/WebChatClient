@@ -1,0 +1,30 @@
+.context_menu{
+    position: fixed;
+   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+   z-index: 9999;
+   background-color: rgb(31, 30, 30);
+    border-radius: 10px;
+
+   font-size: 20px;
+   width: 150px;
+}
+
+
+.context-block{
+    list-style: none;
+   width: 100%;
+}
+
+
+.context-block li{
+    margin: 5px;
+    padding: 2px 5px;
+}
+
+
+
+.context-block li:hover{
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: rgba(118, 127, 132, 0.2);
+}

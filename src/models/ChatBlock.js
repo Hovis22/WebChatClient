@@ -9,6 +9,8 @@ import React, { useState,useEffect } from 'react';
 
 export default function ChatBlock({ActiveChannel,Messages,handleSendMess}) {
   const [isNull, setisNull] = useState(true);
+  const [messtext,setmesstext] = useState();
+  const [messid,setmessid] = useState();
 
   useEffect(()=>{
      if(Messages !=null){
@@ -19,6 +21,7 @@ export default function ChatBlock({ActiveChannel,Messages,handleSendMess}) {
   },Messages)
 
 
+
     return (
      <div className="chat-wrapper">
 
@@ -27,7 +30,7 @@ export default function ChatBlock({ActiveChannel,Messages,handleSendMess}) {
 
            <div className="main-chat-wrapper">
            <div className="main-chat-block">
-            <ChatInterface handleSendMess={handleSendMess} ActiveChannel={ActiveChannel} Messages={Messages}/>
+            <ChatInterface handleSendMess={handleSendMess} ActiveChannel={ActiveChannel} Messages={Messages}  messtext={messtext}  setmesstext={setmesstext} messid={messid}/>
 
 
             {isNull ? (
@@ -35,7 +38,7 @@ export default function ChatBlock({ActiveChannel,Messages,handleSendMess}) {
       ) : (
         <>
           
-            <Chat Messages={Messages}/>
+            <Chat setmesstext={setmesstext} setmessid={setmessid} Messages={Messages}/>
        </>
       )}
 

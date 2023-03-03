@@ -77,7 +77,6 @@ export default function ChannelsBlock({activeID,setactiveID,channelsList,handleS
        {searchResult.map((channel)=>
           <SearchChannel key={channel.Id} activeID={activeID} channel={channel} setactiveID={setactiveID} handleSendMess={handleSendMess}/>
       )}
-
       </>
    )}
 
