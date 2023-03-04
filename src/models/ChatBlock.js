@@ -10,7 +10,7 @@ import React, { useState,useEffect } from 'react';
 export default function ChatBlock({ActiveChannel,Messages,handleSendMess}) {
   const [isNull, setisNull] = useState(true);
   const [messtext,setmesstext] = useState();
-  const [messid,setmessid] = useState();
+  const [messid,setmessid] = useState("");
 
   useEffect(()=>{
      if(Messages !=null){
@@ -38,7 +38,7 @@ export default function ChatBlock({ActiveChannel,Messages,handleSendMess}) {
       ) : (
         <>
           
-            <Chat setmesstext={setmesstext} setmessid={setmessid} Messages={Messages}/>
+            <Chat setmesstext={setmesstext} setmessid={setmessid} Messages={Messages} handleSendMess={handleSendMess}  ActiveChannel={ActiveChannel}/>
        </>
       )}
 

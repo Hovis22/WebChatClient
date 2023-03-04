@@ -6,7 +6,7 @@ import ContextMenu   from "../models/ContextMenu";
 
 
 
-export default function Chat({Messages,setmesstext,setmessid}) {
+export default function Chat({Messages,setmesstext,setmessid,handleSendMess,ActiveChannel}) {
   
  
     
@@ -18,7 +18,7 @@ export default function Chat({Messages,setmesstext,setmessid}) {
 <div className="centre-block">
 
 
-    <ContextMenu items={Messages} setmesstext={setmesstext} setmessid={setmessid}/>
+    <ContextMenu items={Messages} setmesstext={setmesstext} setmessid={setmessid} handleSendMess={handleSendMess} ActiveChannel={ActiveChannel}/>
      
 </div>
 

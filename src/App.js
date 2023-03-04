@@ -44,7 +44,6 @@ function App() {
     useEffect(() => {
       if(activeID != null){  
         console.log(activeID);
-
         let test = {
           "name": "GetChatById",
           "object":{
@@ -52,7 +51,6 @@ function App() {
             
           }
         }
-
         console.log(test);
 
         handleSendMess(test);
@@ -147,7 +145,13 @@ function App() {
           setsearchmess(null);
           setchannelsList(data.Data);
                   break;
-
+          case "ChangeMess": 
+          updateItemById(data.Data.Id,data.Data);
+                          break;
+         case "DeleteMes": 
+         console.log(data.Data);
+         removeItemById(data.Data);
+           break;
 
         }
       } catch (error) {
@@ -159,6 +163,33 @@ function App() {
 
 
   
+  const updateItemById = (id, updatedItem) => {
+    setmessages(prevItems => {
+      return prevItems.map(item => {
+        if (item.Id === id) {
+          return { ...item, ...updatedItem };
+        }
+        return item;
+      });
+    });
+
+    console.log(messages)
+  };
+
+
+  const removeItemById = (id) => {
+    setmessages(prevItems => prevItems.reduce((acc, item) => {
+      if (item.Id !== id) {
+        acc.push(item);
+      }
+      return acc;
+    }, []));
+  };
+  
+
+
+
+
    
   return (
     <div id='wrap' className="wrapper">

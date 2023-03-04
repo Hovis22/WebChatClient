@@ -34,14 +34,30 @@ export default function ContextMenu(props) {
     
 
 
-    function handleMenuItemClick(itemId,itemValue) {
+    function handleMenuChangeClick(itemId,itemValue) {
       setIsVisible(false);
-      console.log(itemId)
-      console.log(itemValue);
       props.setmesstext(itemValue);
       props.setmessid(itemId);
-      // Обработчик клика по пункту меню для выбранного элемента
+   
     }
+
+
+    function handleMenuDeleteClick(itemId,itemValue) {
+      setIsVisible(false);
+    
+     let mes = {
+        "name": "DeleteMes",
+        "object":{
+          "ChatId":props.ActiveChannel.Id.toString(),
+          "MessId": itemId
+        }
+      }
+
+      props.handleSendMess(mes);
+
+    }
+
+
   
     return (
       <>
@@ -58,8 +74,8 @@ export default function ContextMenu(props) {
             }}
           >
             <ul className="context-block">
-              <li onClick={() => handleMenuItemClick(selectedItem.Id,selectedItem.Mess_Text)}>Change{selectedItem.name}</li>
-              <li onClick={() => handleMenuItemClick(selectedItem.Id,selectedItem.Mess_Text)}>Delete{selectedItem.name}</li>
+              <li onClick={() => handleMenuChangeClick(selectedItem.Id,selectedItem.Mess_Text)}>Change{selectedItem.name}</li>
+              <li onClick={() => handleMenuDeleteClick(selectedItem.Id,selectedItem.Mess_Text)}>Delete{selectedItem.name}</li>
             </ul>
           </div>
         )}

@@ -16,15 +16,26 @@ export default function ChatInterface({handleSendMess,ActiveChannel,messtext,set
    
   function CreateMess(){
     let user = jwt_decode(localStorage.getItem("User"));
-     
-     
-    let mes = {
+    let mes;
+     if(messid == ""){
+     mes = {
       "name": "PostMess",
       "object":{
         "UserId":user.Id.toString(),
         "ChatId":ActiveChannel.Id.toString(),
-        "MessageText":messtext.toString(),
-        "MessageId":messid
+        "MessageText":messtext.toString()
+      }
+    }
+    }
+    else{
+       mes = {
+        "name": "ChangeMess",
+        "object":{
+          "UserId":user.Id.toString(),
+          "ChatId":ActiveChannel.Id.toString(),
+          "MessageText":messtext.toString(),
+          "MessId": messid
+        }
       }
     }
    console.log(mes);
