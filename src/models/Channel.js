@@ -19,10 +19,9 @@ export default function Channel({setactiveID,channel,activeID}){
 
       
 
-      console.log(lastmess);
-      console.log(today);
+    
        if(lastmess.getDate() == today.getDate()){
-        console.log(lastmess.getTime());
+       
          setmessDate(lastmess.getHours().toString() +":" + lastmess.getMinutes().toString());
        }
 

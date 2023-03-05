@@ -8,9 +8,9 @@ import './css/mess_chan_style.css';
 import './css/chat-block_style.css';
 import './css/form_style.css';
 import './css/context-menu.css';
-
+import './css/chan-menu.css';
 import 'react-bootstrap-icons';
-
+import './css/modal.css';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -43,11 +43,19 @@
     width: 45px;
 }
 
+
+
 .menu-wrapper .zxc{
     width: 30px;
     margin-top: 2px;
 
 }
+
+.menu-wrapper .photo{
+    width: 2500px;
+    margin-top: 5px;
+}
+
 
 .menu-wrapper:hover{
     background-color: rgb(47, 51, 51);

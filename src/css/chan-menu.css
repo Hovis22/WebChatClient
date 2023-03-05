@@ -1,0 +1,30 @@
+.chan-menu{
+    display: flex;
+    list-style: none;  
+    flex-direction: column;
+    background-color: rgb(31, 30, 30);
+    color: #fff;
+    z-index: 99;
+    width: 200px;
+    height: 13vh;
+    margin-top: 25px;
+    margin-left:  100px;    
+    border-radius: 10px;
+    border: 1px solid rgb(57, 55, 55);
+}
+
+
+.chan-menu li{
+    display: flex;
+
+    align-items: center;
+    justify-content:space-evenly;
+    padding: 9px;
+}
+
+
+.chan-menu li:hover{
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: rgba(118, 127, 132, 0.2);
+}
