@@ -136,14 +136,18 @@ function App() {
             console.log(data.Data);
             setmessages(data.Data);
             break;
-          case "NewMessage":setmessages(prevState => prevState.concat(data.Data));
+          case "NewMessage":{
+            setmessages(prevState => prevState.concat(data.Data));
+          
+            updateLastMessById(data.Data.ChatId,data.Data)
+          }
               break;
           case "ChannelsFound": setsearchResult(data.Data);
                   break;
           case "AddChannel": 
           setNullSearch(true);
           setsearchmess(null);
-          setchannelsList(data.Data);
+          setchannelsList(data.Data.Id,data.Data);
                   break;
           case "ChangeMess": 
           updateItemById(data.Data.Id,data.Data);
@@ -161,6 +165,20 @@ function App() {
   }
 
 
+
+  const updateLastMessById = (id, updatedItem) => {
+    console.log(updatedItem.Mess_Text);
+    setchannelsList(prevItems => {
+      return prevItems.map(item => {
+        if (item.Id === id) {
+          return { ...item, LastMessage: updatedItem.Mess_Text, LastMessageCreated: updatedItem.Created };
+        }
+        return item;
+      });
+    });
+
+    console.log(messages)
+  };
 
   
   const updateItemById = (id, updatedItem) => {

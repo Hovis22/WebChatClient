@@ -21,7 +21,7 @@ export default function ChannelsBlock({activeID,setactiveID,channelsList,handleS
 
 
 
-      if( MessSearch.object.value != ""){
+      if( MessSearch.object.value != "" && channelsList!=[]){
       setfilterChats(channelsList.filter((item) => item.UserName.toLowerCase().startsWith(MessSearch.object.value.toLowerCase())));
       }
      

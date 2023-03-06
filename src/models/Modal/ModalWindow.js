@@ -15,11 +15,11 @@ function ModalWindow({ setShowModal,setisEdit}) {
             <button className="close-button" onClick={() => setShowModal(false)}>X</button>
             </div>
           </div>
-          <div className="modal-body" style={{ backgroundImage: `url(${require('../../img/dora.jpg')})` }}>
+          <div className="modal-body" style={{ backgroundImage:`url(data:image/png;base64,${user.Image})` }}>
 
             <div className='info-container-modal'>
             <h2>{user.Name}</h2>
-             <p>@Hovis242</p>
+             <p>{user.Login}</p>
 
             </div>
                         

@@ -35,7 +35,7 @@ export default function Channel({setactiveID,channel,activeID}){
 
         <div onClick={()=>setactiveID(channel.Id)} className={blstyle}>
           <div className="image-block">
-            <img src={require('../img/dora.jpg')} alt=""/>
+            <img src={`data:image/png;base64,${channel.UserImage}`} alt=""/>
           </div>
 
           <div className="info-container">
