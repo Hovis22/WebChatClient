@@ -22,7 +22,7 @@ export default function Login({setisLogin}){
         .then(data => data.text())
         .then(e => {
           localStorage.setItem("User",e);
-
+          window.location.reload();
         }
           )
         .catch(error => {

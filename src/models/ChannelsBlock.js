@@ -16,7 +16,7 @@ export default function ChannelsBlock({activeID,setactiveID,channelsList,handleS
   const [filterChats,setfilterChats] = useState(null);
 
     useEffect(()=>{
-      console.log(channelsList);
+      console.log(MessSearch);
      if(MessSearch != null){
 
 
@@ -24,13 +24,19 @@ export default function ChannelsBlock({activeID,setactiveID,channelsList,handleS
       if( MessSearch.object.value != "" && channelsList!=[]){
       setfilterChats(channelsList.filter((item) => item.UserName.toLowerCase().startsWith(MessSearch.object.value.toLowerCase())));
       }
-     
+      else{
+        setfilterChats(channelsList);
+      }
+
+
     
     }
     else{
       if(channelsList !=null){
+      
       setfilterChats(channelsList);
-          }
+     console.log(filterChats);  
+    }
     }
     },[MessSearch,channelsList])
 

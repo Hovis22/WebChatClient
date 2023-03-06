@@ -1,6 +1,9 @@
  import ChannelsBlock from './models/ChannelsBlock';
  import IsActive from './func/IsActive';
 import jwt_decode from "jwt-decode";
+import updateItemById from './func/Updates';
+import { removeItemById,updateLastMessById,updateChannelStatusById } from './func/Updates';
+
 
 import React, { useState, useEffect,useCallback,useRef } from 'react';
 
@@ -133,13 +136,11 @@ function App() {
             setchannelsList(data.Data);
             break;
           case "Messages":
-            console.log(data.Data);
             setmessages(data.Data);
             break;
           case "NewMessage":{
             setmessages(prevState => prevState.concat(data.Data));
-          
-            updateLastMessById(data.Data.ChatId,data.Data)
+            updateLastMessById({setchannelsList},data.Data.ChatId,data.Data)
           }
               break;
           case "ChannelsFound": setsearchResult(data.Data);
@@ -150,13 +151,18 @@ function App() {
           setchannelsList(data.Data.Id,data.Data);
                   break;
           case "ChangeMess": 
-          updateItemById(data.Data.Id,data.Data);
+          updateItemById({setmessages},data.Data.Id,data.Data);
                           break;
          case "DeleteMes": 
-         console.log(data.Data);
-         removeItemById(data.Data);
+         removeItemById({setmessages},data.Data);
            break;
-
+           case "SetOffline": 
+           console.log(data.Data);
+             break;
+             case "SetOnline": 
+             console.log(data.Data);
+             updateChannelStatusById({setchannelsList},data.Data,true);
+               break;
         }
       } catch (error) {
         console.error(error);
@@ -166,49 +172,6 @@ function App() {
 
 
 
-  const updateLastMessById = (id, updatedItem) => {
-    console.log(updatedItem.Mess_Text);
-    setchannelsList(prevItems => {
-      return prevItems.map(item => {
-        if (item.Id === id) {
-          return { ...item, LastMessage: updatedItem.Mess_Text, LastMessageCreated: updatedItem.Created };
-        }
-        return item;
-      });
-    });
-
-    console.log(messages)
-  };
-
-  
-  const updateItemById = (id, updatedItem) => {
-    setmessages(prevItems => {
-      return prevItems.map(item => {
-        if (item.Id === id) {
-          return { ...item, ...updatedItem };
-        }
-        return item;
-      });
-    });
-
-    console.log(messages)
-  };
-
-
-  const removeItemById = (id) => {
-    setmessages(prevItems => prevItems.reduce((acc, item) => {
-      if (item.Id !== id) {
-        acc.push(item);
-      }
-      return acc;
-    }, []));
-  };
-  
-
-
-
-
-   
   return (
     <div id='wrap' className="wrapper">
       

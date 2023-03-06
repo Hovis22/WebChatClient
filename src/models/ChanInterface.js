@@ -80,7 +80,7 @@ function ChanInterface({ handleSearchChannel }) {
         {isMenuOpen && (
           <ul className="chan-menu">
             <li onClick={() => setShowModal(true)}><PersonFill/>Account</li>
-            <li><BoxArrowLeft/>Exit</li>
+            <li onClick={() => {localStorage.removeItem("User");window.location.reload();}}><BoxArrowLeft/>Exit</li>
           </ul>
         )}
  
