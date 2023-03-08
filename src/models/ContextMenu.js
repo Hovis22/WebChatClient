@@ -91,14 +91,16 @@ export default function ContextMenu(props) {
    user =jwt_decode(localStorage.getItem("User"));
   }
   function IsOwn(message){
+      const time =   new Date(message.Created);
+
       if(message.UserId == user.Id){
      return( <div key={message.Id} className="message-own-wrapper">
-      <p>{message.Mess_Text}</p>
+      <p>{message.Mess_Text}<span className="message-time">{ time.getHours().toString() +   ':' +  time.getMinutes().toString().padStart(2, '0')}</span></p>
     </div>);
      }
      else{
       return( <div key={message.Id}  className="message-other-wrapper">
-      <p>{message.Mess_Text}</p>
+      <p>{message.Mess_Text}<span className="message-time">{ time.getHours().toString() +   ':' +  time.getMinutes().toString().padStart(2, '0')}</span></p>
     </div>);
      }
   

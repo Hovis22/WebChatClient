@@ -69,13 +69,15 @@ function ChanInterface({ handleSearchChannel }) {
     <>
     <div className="channels-interface">
       <div className="menu-wrapper" ref={menuRef}>
-             <div>
+            
         {isMenuOpen ? (
           <X className='zxc' onClick={handleMenuToggle}/>
         ) : (
+
           <List className='zxc' onClick={handleMenuToggle} />
+          
         )}
-</div>
+  
 
         {isMenuOpen && (
           <ul className="chan-menu">
