@@ -27,7 +27,6 @@ export function removeItemById({setmessages},id){
 
 
 export function updateLastMessById({setchannelsList},id, updatedItem){
-    console.log(updatedItem.Mess_Text);
     setchannelsList(prevItems => {
       return prevItems.map(item => {
         if (item.Id === id) {
@@ -41,14 +40,25 @@ export function updateLastMessById({setchannelsList},id, updatedItem){
 
 
   
-export function updateChannelStatusById({setchannelsList},id, updatedItem){
+export function updateChannelStatusById({setchannelsList,setActiveChannel},id, updatedItem,ActiveChannel){
+  
+   
     setchannelsList(prevItems => {
       return prevItems.map(item => {
-        if (item.UserId === id) {
+      
+        if (item.UserId == id) {
           return { ...item, UserStatus: updatedItem};
         }
         return item;
       });
     });
+
+
+    if(ActiveChannel == id){
+        setActiveChannel({ ...ActiveChannel, UserStatus: updatedItem });
+
+    }
+
+
   };
  

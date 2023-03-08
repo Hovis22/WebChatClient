@@ -5,6 +5,7 @@ export default function ChatHeader({ActiveChannel}) {
    const [status,setstatus]=useState(null);
 
   useEffect(()=>{
+    console.log(ActiveChannel.UserStatus);
     if(ActiveChannel!=null){
        if(ActiveChannel.UserStatus == true){
         setstatus("Online");
@@ -13,7 +14,7 @@ export default function ChatHeader({ActiveChannel}) {
         setstatus("Offline");
        }
     }
-  },[ActiveChannel.UserStatus,ActiveChannel])
+  },[ActiveChannel.UserStatus])
 
 
   

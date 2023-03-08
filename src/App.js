@@ -9,9 +9,10 @@ import React, { useState, useEffect,useCallback,useRef } from 'react';
 
 
 
-  var ActiveChannel = null;
+var ActiveChannel = null;
 function App() {
   const ws = useRef(null);
+  const [ActiveChannel,setActiveChannel] = useState(null);
   const [socket, setSocket] = useState({});
   const [activeID, setactiveID] = useState(null);
   const [chatBl, setchatBl] = useState(null);
@@ -67,13 +68,20 @@ function App() {
     if(messages != null){  
 
 
-     
-     ActiveChannel = channelsList.find(x => x.Id == activeID);
-       const elem = IsActive({ActiveChannel,messages,handleSendMess});
-       setchatBl(elem);
+      console.log(ActiveChannel);
+      setActiveChannel(channelsList.find(x => x.Id == activeID));
 
     }
       },[messages]);
+
+
+  useEffect(()=>{
+    if(ActiveChannel!=null){
+       const elem = IsActive({ActiveChannel,messages,handleSendMess});
+       console.log(ActiveChannel);
+       setchatBl(elem);
+    }
+  },[ActiveChannel])
 
 
 
@@ -157,11 +165,14 @@ function App() {
          removeItemById({setmessages},data.Data);
            break;
            case "SetOffline": 
-           console.log(data.Data);
+        
+           updateChannelStatusById({setchannelsList,setActiveChannel},data.Data,false,ActiveChannel);
+           console.log(channelsList);
              break;
              case "SetOnline": 
-             console.log(data.Data);
-             updateChannelStatusById({setchannelsList},data.Data,true);
+      
+             updateChannelStatusById({setchannelsList,setActiveChannel},data.Data,true,ActiveChannel);
+        
                break;
         }
       } catch (error) {

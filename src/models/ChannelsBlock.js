@@ -36,6 +36,7 @@ export default function ChannelsBlock({activeID,setactiveID,channelsList,handleS
       
       setfilterChats(channelsList);
      console.log(filterChats);  
+ 
     }
     }
     },[MessSearch,channelsList])

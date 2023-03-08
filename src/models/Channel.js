@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 export default function Channel({setactiveID,channel,activeID}){
    const [messDate,setmessDate] = useState("");
-
+   const [status,setStatus] = useState(null);
 
   var blstyle = "channel-block";
     if(activeID == channel.Id){
@@ -11,21 +11,27 @@ export default function Channel({setactiveID,channel,activeID}){
     }
 
 
+    useEffect(() => {
+      console.log(channel);
+      if(channel.UserStatus == false){
+           setStatus("image-block");
+       }
+       else{
+        setStatus("image-block-online");
+       }
+     }, [ ,channel.UserStatus]);
+ 
+
 
 
     useEffect(() => {
      let  lastmess =new Date(channel.LastMessageCreated);
      const today = new Date();
-
-      
-
     
        if(lastmess.getDate() == today.getDate()){
        
-         setmessDate(lastmess.getHours().toString() +":" + lastmess.getMinutes().toString());
+         setmessDate(lastmess.getHours().toString() +":" + lastmess.getMinutes().toString().padStart(2, '0'));
        }
-
-
 
     }, [channel.LastMessageCreated]);
 
@@ -34,7 +40,7 @@ export default function Channel({setactiveID,channel,activeID}){
         <div  className="channel-wrapper">
 
         <div onClick={()=>setactiveID(channel.Id)} className={blstyle}>
-          <div className="image-block">
+          <div className={status}>
             <img src={`data:image/png;base64,${channel.UserImage}`} alt=""/>
           </div>
 

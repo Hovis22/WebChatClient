@@ -8,7 +8,7 @@ import jwt_decode from "jwt-decode";
 
 
 
-export default function ChatInterface({handleSendMess,ActiveChannel,messtext,setmesstext,messid}){
+export default function ChatInterface({handleSendMess,ActiveChannel,messtext,setmesstext,messid,setmessid}){
 
  
 
@@ -42,6 +42,7 @@ export default function ChatInterface({handleSendMess,ActiveChannel,messtext,set
   
     handleSendMess(mes);
     setmesstext("");
+    setmessid("");
   }
 
 

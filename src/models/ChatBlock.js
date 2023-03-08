@@ -30,7 +30,7 @@ export default function ChatBlock({ActiveChannel,Messages,handleSendMess}) {
 
            <div className="main-chat-wrapper">
            <div className="main-chat-block">
-            <ChatInterface handleSendMess={handleSendMess} ActiveChannel={ActiveChannel} Messages={Messages}  messtext={messtext}  setmesstext={setmesstext} messid={messid}/>
+            <ChatInterface handleSendMess={handleSendMess} ActiveChannel={ActiveChannel} Messages={Messages}  messtext={messtext}  setmesstext={setmesstext} messid={messid} setmessid={setmessid}/>
 
 
             {isNull ? (
