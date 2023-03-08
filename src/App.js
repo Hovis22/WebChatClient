@@ -93,9 +93,7 @@ function App() {
  
       handleSendMess(searchmess);
       }
-      else{
-        setNullSearch(true);
-      }
+     
      }
    },[searchmess])
 
@@ -103,8 +101,10 @@ function App() {
 
     useEffect(() => {
       if (searchResult !== null) {
-
+        if(searchResult.length >1){
+        console.log(searchResult);
         setNullSearch(false);
+        }
       }
     }, [searchResult]);
 
@@ -147,8 +147,11 @@ function App() {
             setmessages(data.Data);
             break;
           case "NewMessage":{
+            if(messages !=null && ActiveChannel.Id == data.Data.ChatId){
             setmessages(prevState => prevState.concat(data.Data));
+            }
             updateLastMessById({setchannelsList},data.Data.ChatId,data.Data)
+
           }
               break;
           case "ChannelsFound": setsearchResult(data.Data);
@@ -156,7 +159,8 @@ function App() {
           case "AddChannel": 
           setNullSearch(true);
           setsearchmess(null);
-          setchannelsList(data.Data.Id,data.Data);
+            
+          setchannelsList(data.Data);
                   break;
           case "ChangeMess": 
           updateItemById({setmessages},data.Data.Id,data.Data);

@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 
 
 export default function Channel({setactiveID,channel,activeID}){
-   const [messDate,setmessDate] = useState("");
+   const [messDate,setMessDate] = useState("");
    const [status,setStatus] = useState(null);
 
+   
   var blstyle = "channel-block";
     if(activeID == channel.Id){
       blstyle= "channel-block-active";
@@ -24,17 +25,31 @@ export default function Channel({setactiveID,channel,activeID}){
 
 
 
-    useEffect(() => {
-     let  lastmess =new Date(channel.LastMessageCreated);
-     const today = new Date();
+     useEffect(() => {
+      const lastMessDate = new Date(channel.LastMessageCreated);
+      const today = new Date();
     
-       if(lastmess.getDate() == today.getDate()){
-       
-         setmessDate(lastmess.getHours().toString() +":" + lastmess.getMinutes().toString().padStart(2, '0'));
-       }
-
+      if (lastMessDate.getDate() === today.getDate()) {
+        setMessDate(
+          lastMessDate.getHours().toString() +
+            ':' +
+            lastMessDate.getMinutes().toString().padStart(2, '0')
+        );
+      } else if (
+        Math.floor((today - lastMessDate) / (1000 * 60 * 60 * 24)) >= 7
+      ) {
+        // Show the day in the month and abbreviated month name if the message is within the past 7 days
+        const options = { day: 'numeric', month: 'short' };
+        const dateStr = lastMessDate.toLocaleDateString(undefined, options);
+        setMessDate(dateStr);
+      } else {
+        // Show the abbreviated day name if the message is older than 7 days
+        const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const dayName = days[lastMessDate.getDay()];
+        setMessDate(dayName);
+      }
     }, [channel.LastMessageCreated]);
-
+    
 
     return (
         <div  className="channel-wrapper">
