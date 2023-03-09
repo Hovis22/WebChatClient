@@ -26,7 +26,7 @@ export default function ChatBlock({ActiveChannel,Messages,handleSendMess}) {
      <div className="chat-wrapper">
 
        <div className="chat-block">
-           <Header ActiveChannel={ActiveChannel} />
+           <Header ActiveChannel={ActiveChannel} handleSendMess={handleSendMess}/>
 
            <div className="main-chat-wrapper">
            <div className="main-chat-block">

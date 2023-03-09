@@ -1,8 +1,23 @@
 import { useEffect, useState } from "react";
-
-export default function ChatHeader({ActiveChannel}) {
+import {TrashFill} from  'react-bootstrap-icons';
+export default function ChatHeader({ActiveChannel,handleSendMess}) {
   
    const [status,setstatus]=useState(null);
+
+   
+    function DeleteChat(){
+      let test = {
+        "name": "DeleteChat",
+        "object":{
+           "ChatId":ActiveChannel.Id
+        }
+      }
+
+     handleSendMess(test);
+
+
+    }
+
 
   useEffect(()=>{
     console.log(ActiveChannel.UserStatus);
@@ -30,7 +45,7 @@ export default function ChatHeader({ActiveChannel}) {
           </div>
         </div>
         <div className="chat-menu">
-          <img src="/img/three-dots-vertical.svg" alt=""/>
+          <TrashFill className="three-dots" onClick={DeleteChat}/>
         </div>
       </div>
     );

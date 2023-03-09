@@ -26,6 +26,21 @@ export function removeItemById({setmessages},id){
 
 
 
+export function removeChanelById({setchannelsList},id){
+
+ console.log(id);
+
+  setchannelsList(prevItems => prevItems.reduce((acc, item) => {
+
+    if (item.Id !== id) {
+     console.log(123);
+      acc.push(item);
+    }
+    return acc;
+  }, []));
+};
+
+
 export function updateLastMessById({setchannelsList},id, updatedItem){
     setchannelsList(prevItems => {
       return prevItems.map(item => {
@@ -40,7 +55,7 @@ export function updateLastMessById({setchannelsList},id, updatedItem){
 
 
   
-export function updateChannelStatusById({setchannelsList,setActiveChannel},id, updatedItem,ActiveChannel){
+export function updateChannelStatusById({setchannelsList},id, updatedItem){
   
    
     setchannelsList(prevItems => {
@@ -54,11 +69,46 @@ export function updateChannelStatusById({setchannelsList,setActiveChannel},id, u
     });
 
 
-    if(ActiveChannel == id){
-        setActiveChannel({ ...ActiveChannel, UserStatus: updatedItem });
 
-    }
 
+  };
+ 
+
+  export function updateChannelCount({setchannelsList},id){
+  
+   
+    setchannelsList(prevItems => {
+      return prevItems.map(item => {
+      
+        if (item.Id == id) {
+          return { ...item, MessageCount : item.MessageCount++};
+        }
+        return item;
+      });
+    });
+
+
+    
+
+  };
+ 
+
+
+  export function updateChannelCountZero({setchannelsList},id){
+  
+   
+    setchannelsList(prevItems => {
+      return prevItems.map(item => {
+      
+        if (item.Id == id) {
+          return { ...item, MessageCount : 0};
+        }
+        return item;
+      });
+    });
+
+
+    
 
   };
  

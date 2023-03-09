@@ -54,10 +54,7 @@ export default function ChatInterface({handleSendMess,ActiveChannel,messtext,set
 
       <div className="icon-pad">
 
-        <label className="custom-file-upload">
-          <input type="file" />
-          <Paperclip/>
-        </label>
+      
 
         <label onClick={CreateMess}  className="custom-button">
            <CaretUpFill/>

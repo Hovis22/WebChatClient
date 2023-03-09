@@ -38,12 +38,12 @@ export default function Channel({setactiveID,channel,activeID}){
       } else if (
         Math.floor((today - lastMessDate) / (1000 * 60 * 60 * 24)) >= 7
       ) {
-        // Show the day in the month and abbreviated month name if the message is within the past 7 days
+   
         const options = { day: 'numeric', month: 'short' };
         const dateStr = lastMessDate.toLocaleDateString(undefined, options);
         setMessDate(dateStr);
       } else {
-        // Show the abbreviated day name if the message is older than 7 days
+     
         const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         const dayName = days[lastMessDate.getDay()];
         setMessDate(dayName);
