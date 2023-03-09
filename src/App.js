@@ -10,6 +10,7 @@ import React, { useState, useEffect,useCallback,useRef } from 'react';
 
 
 function App() {
+  
   const ws = useRef(null);
   const [ActiveChannel,setActiveChannel] = useState(null);
   const [socket, setSocket] = useState({});
@@ -83,7 +84,8 @@ function App() {
    useEffect(()=>{
    
     if(searchmess != null){
-      setsearchResult(null);
+      setsearchResult([]);
+      setNullSearch(true);
       if(searchmess.object.value.length > 3){  
  
       handleSendMess(searchmess);
@@ -95,12 +97,15 @@ function App() {
 
 
     useEffect(() => {
+    
       if (searchResult !== null) {
         if(searchResult.length >0){
         console.log(searchResult);
         setNullSearch(false);
         }
+     
       }
+    
     }, [searchResult]);
 
 
@@ -192,7 +197,10 @@ function App() {
 
           }
               break;
-          case "ChannelsFound": setsearchResult(data.Data);
+          case "ChannelsFound": 
+       
+
+          setsearchResult(data.Data);
                   break;
           case "AddChannel": 
           setNullSearch(true);

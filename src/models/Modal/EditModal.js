@@ -12,6 +12,20 @@ function EditModal({ setShowModal, setisEdit }) {
   const [fileBytes, setfileBytes] = useState(null);
   const login = useRef(user.Login);
   const name = useRef(user.Name);
+  const [errors, setErrors] = useState({});
+
+
+  const validate = () => {
+    let newErrors = {};
+    if (name.current.value.length < 4) {
+      newErrors.name = 'Name must be at least 4 characters long';
+    }
+    if (login.current.value.length < 4) {
+      newErrors.login = 'Username must be at least 4 characters long';
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
 
  useEffect(()=>{
@@ -66,6 +80,11 @@ function EditModal({ setShowModal, setisEdit }) {
 
   const handleSubmit = () => {
  
+      if(!validate()){
+        return;
+      };
+
+
     const data = {
       "Id": user.Id,
       "Name":  name.current.value,
@@ -81,13 +100,21 @@ function EditModal({ setShowModal, setisEdit }) {
       method: 'POST',
       body: formData
     })
-      .then(data => data.text())
+    .then(response => {
+      if (!response.ok) {
+        return response.text().then(error => {
+          throw new Error(error);
+        });
+      }
+      return response.text();
+    })
       .then(e => {
     user =  localStorage.setItem("User",e);
 
       }
         )
       .catch(error => {
+        
         console.error(error);
       });
   }
@@ -117,13 +144,15 @@ function EditModal({ setShowModal, setisEdit }) {
           <div className="modal-change-input">
             <label>First Name</label>
             <input ref={name} type="text"   />
+            {errors.name && <div className="error">{errors.name}</div>}
           </div>
 
           <div className="modal-change-input">
             <label>UserName</label>
             <input ref={login}    type="text" />
+             {errors.login && <div className="error">{errors.login}</div>}
           </div>
-
+      
           <input id="change-button" type="button" value="Submit" onClick={handleSubmit} />
         </div>
       </div>

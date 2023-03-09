@@ -78,3 +78,9 @@ form input[type="button"]:hover{
     color: rgb(21, 108, 222);
     cursor: pointer;
 }
+
+
+.error{
+    color: red;
+    font-weight: 500;
+}
